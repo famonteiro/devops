@@ -1,0 +1,13 @@
+{
+  "name": "inspired/windows_2012_r2-load-test-huge-disks",
+  "description": "This box contains Windows 2012 R2 64-bit.",
+  "versions": [{
+    "version": "0.1.0",
+    "providers": [{
+      "name": "virtualbox",
+      "url": "	config.vm.box_url="http://172.28.23.224/binaries/vagrant/boxes/windows_2012_r2_virtualbox-load-test-huge-disks.box",
+      "checksum_type": "sha1",
+      "checksum": "E8724DB61AB31F4C7CFA3997FE6E0D70F8409B7F"
+    }]
+  }]
+}
