@@ -313,17 +313,15 @@
                     <Order>22</Order>
                     <Description>Disable password expiration for vagrant user</Description>
                 </SynchronousCommand>
-				<!-- Install Microsoft .NET Framework 3.5 SP1 -->
-				<SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File a:\install-dotnet-35sp1.ps1</CommandLine>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File a:\dis-updates.ps1</CommandLine>
+                    <Description>Disable Automatic Updates</Description>
                     <Order>23</Order>
-                    <Description>Install SQL Server 2014 Enterprise</Description>
                 </SynchronousCommand>
-				<!-- Install SQL Server Express 2014 -->
-				<SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File a:\sqlserver2014enterprise.ps1</CommandLine>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File a:\set-power-config.ps1</CommandLine>
+                    <Description>Set Power Config to High Performance</Description>
                     <Order>24</Order>
-                    <Description>Install SQL Server 2014 Enterprise</Description>
                 </SynchronousCommand>
                 <!-- WITHOUT WINDOWS UPDATES -->
                 <SynchronousCommand wcm:action="add">

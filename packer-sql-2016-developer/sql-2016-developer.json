@@ -1,0 +1,45 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-ovf",
+      "source_path": "{{user `ovf_path`}}",
+      "headless": false,
+      "boot_wait": "2m",
+      "boot_command": ["<leftCtrlOn><leftAltOn><del>"],
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "3h",
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "guest_additions_mode": "disable",
+      "floppy_files": [
+    	"./scripts/ConfigurationFile.ini"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "./iso/en_sql_server_2016_developer_x64_dvd_8777069.iso",
+      "destination": "C:/Windows/Temp/en_sql_server_2016_developer_x64_dvd_8777069.iso"
+    },
+    {
+      "type": "powershell",
+      "scripts": [
+        "./scripts/Enable-Dot-Net.ps1",
+	      "./scripts/Add-SQL-Server-Firewall-Rules.ps1",
+	      "./scripts/Install-SQL-Server-2016-Developer.ps1"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": false,
+      "output": "windows_2016_server_core_{{.Provider}}.box",
+      "vagrantfile_template": "vagrantfile-windows_2016_server_core.template"
+    }
+  ],
+  "variables": {
+    "ovf_path": "./ovf/box.ovf"
+  }
+}

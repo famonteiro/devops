@@ -51,14 +51,6 @@
       ]
     }
   ],
-  "post-processors": [
-    {
-      "type": "vagrant",
-      "keep_input_artifact": false,
-      "output": "windows_2016_server_core_{{.Provider}}.box",
-      "vagrantfile_template": "vagrantfile-windows_2016_server_core.template"
-    }
-  ],
   "variables": {
     "iso_url": "./iso/14393.0.161119-1705.RS1_REFRESH_SERVER_EVAL_X64FRE_EN-US.ISO",
     "iso_checksum_type": "md5",
