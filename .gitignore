@@ -1,4 +1,5 @@
 iso/
 ovf/
+output-virtualbox-iso/
 *.box
 .DS_Store
