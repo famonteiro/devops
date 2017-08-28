@@ -12,22 +12,22 @@
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
       "guest_additions_mode": "disable",
       "floppy_files": [
-    	"./scripts/ConfigurationFile.ini"
+    	  "./scripts/ConfigurationFile.ini"
       ]
     }
   ],
   "provisioners": [
     {
       "type": "file",
-      "source": "./iso/en_sql_server_2016_developer_x64_dvd_8777069.iso",
-      "destination": "C:/Windows/Temp/en_sql_server_2016_developer_x64_dvd_8777069.iso"
+      "source": "./iso/SQLServer2014SP1-FullSlipstream-x64-ENU.iso",
+      "destination": "C:/Windows/Temp/SQLServer2014SP1-FullSlipstream-x64-ENU.iso"
     },
     {
       "type": "powershell",
       "scripts": [
-        "./scripts/Enable-Dot-Net.ps1",
-	      "./scripts/Add-SQL-Server-Firewall-Rules.ps1",
-	      "./scripts/Install-SQL-Server-2016-Developer.ps1"
+        "./scripts/Install-DotNet-35.ps1",
+        "./scripts/Install-SQL-Server-2014-Enterprise.ps1",
+	      "./scripts/Add-SQL-Server-Firewall-Rules.ps1"
       ]
     }
   ],
@@ -35,8 +35,8 @@
     {
       "type": "vagrant",
       "keep_input_artifact": false,
-      "output": "windows_2016_server_core_{{.Provider}}.box",
-      "vagrantfile_template": "vagrantfile-windows_2016_server_core.template"
+      "output": "windows_2012_r2_{{.Provider}}.box",
+      "vagrantfile_template": "vagrantfile-windows_2012_r2.template"
     }
   ],
   "variables": {

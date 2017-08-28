@@ -10,12 +10,7 @@ if( !(Test-Path $dotnet_target)) {
 }
 
 # Install Microsoft.NET Framework 3.5 SP1
-Write-Output "Attempting installation of Microsoft.NET Framework 3.5 SP1..."
 Install-WindowsFeature Net-Framework-Core -Source $dotnet_target
-
-
-# Verify that the Installation Succeeded
-#Write-Warning "Verifying that the correct versions have been installed..."
 
 #$list = Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP' -recurse |
 #Get-ItemProperty -name Version,Release -EA 0 |
@@ -33,6 +28,4 @@ Install-WindowsFeature Net-Framework-Core -Source $dotnet_target
 #if( !( $success ) ) {
 #	throw "Microsoft.NET Framework 3.5 SP1 could not be installed."
 #}
-
-Write-Output "Microsoft.NET Framework 3.5 SP1 successfully installed."
 
