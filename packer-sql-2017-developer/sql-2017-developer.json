@@ -1,0 +1,65 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-ovf",
+      "source_path": "{{user `ovf_path`}}",
+      "headless": true,
+      "boot_wait": "2m",
+      "boot_command": ["<leftCtrlOn><leftAltOn><del>"],
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "3h",
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "guest_additions_mode": "disable",
+      "floppy_files": [
+    	  "./scripts/ConfigurationFile.ini"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "./iso/en_sql_server_2017_developer_x64_dvd_11296168.iso",
+      "destination": "C:/Windows/Temp/en_sql_server_2017_developer_x64_dvd_11296168.iso"
+    },
+    {
+      "type": "file",
+      "source": "./scripts/ConfigurationFile.ini",
+      "destination": "C:/Windows/Temp/ConfigurationFile.ini"
+    },
+    {
+      "type": "file",
+      "source": "./scripts/Enable-Dot-Net.ps1",
+      "destination": "C:/Windows/Temp/Enable-Dot-Net.ps1"
+    },
+    {
+      "type": "file",
+      "source": "./scripts/Install-SQL-Server-2017-Developer.ps1",
+      "destination": "C:/Windows/Temp/Install-SQL-Server-2017-Developer.ps1"
+    },
+    {
+      "type": "file",
+      "source": "./scripts/Configure-SQL-Server-2017-Instance.ps1",
+      "destination": "C:/Windows/Temp/Configure-SQL-Server-2017-Instance.ps1"
+    },
+    {
+      "type": "windows-shell",
+      "inline": [
+        "Powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\Temp\\Enable-Dot-Net.ps1",
+        "Powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\Temp\\Install-SQL-Server-2017-Developer.ps1",
+        "Powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\Temp\\Configure-SQL-Server-2017-Instance.ps1"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": false,
+      "output": "windows_2016_server_sql2017_{{.Provider}}.box",
+      "vagrantfile_template": "vagrantfile-windows_2016_server.template"
+    }
+  ],
+  "variables": {
+    "ovf_path": "./ovf/box.ovf"
+  }
+}
