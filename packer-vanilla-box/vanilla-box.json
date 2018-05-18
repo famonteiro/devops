@@ -12,22 +12,15 @@
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
       "guest_additions_mode": "disable",
       "floppy_files": [
-    	  "./scripts/ConfigurationFile.ini"
       ]
     }
   ],
   "provisioners": [
     {
-      "type": "file",
-      "source": "./iso/SQLServer2014SP1-FullSlipstream-x64-ENU.iso",
-      "destination": "C:/Windows/Temp/SQLServer2014SP1-FullSlipstream-x64-ENU.iso"
-    },
-    {
       "type": "powershell",
       "scripts": [
-        "./scripts/Install-DotNet-35.ps1",
-        "./scripts/Install-SQL-Server-2014-Enterprise.ps1",
-	      "./scripts/Add-SQL-Server-Firewall-Rules.ps1"
+        "./scripts/Add-SQL-Server-Firewall-Rules.ps1",
+        "./scripts/Disable-Windows-Updates.ps1"
       ]
     }
   ],
@@ -35,7 +28,7 @@
     {
       "type": "vagrant",
       "keep_input_artifact": false,
-      "output": "windows_2012_r2_{{.Provider}}.box",
+      "output": "windows_vanilla_{{.Provider}}.box",
       "vagrantfile_template": "vagrantfile-windows_2012_r2.template"
     }
   ],
